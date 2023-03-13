@@ -176,6 +176,7 @@
           class="btn btn-primary"
           (click)="
             up.emit({
+              id: oldtodo.id,
               name: up_todo_name,
               priority: up_priority
             })

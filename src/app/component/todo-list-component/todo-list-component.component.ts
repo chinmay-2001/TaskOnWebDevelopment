@@ -22,12 +22,11 @@ export class TodoListComponentComponent {
 
   up_todo_name: string = ""
   up_priority: string = ""
-  @Output() up = new EventEmitter<todo>()
+  @Output() up = new EventEmitter<any>()
   @Output() old = new EventEmitter<todo>()
 
   oldtodo: any
   setTodo(todos: todo) {
     this.oldtodo = todos
   }
-
 }

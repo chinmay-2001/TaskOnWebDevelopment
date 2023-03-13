@@ -12,7 +12,6 @@ import { todo } from 'src/app/store/models/Todo';
 })
 export class TodoListComponent implements OnInit {
   todos$: any;
-  // todos$ = this.store.select(selectTodos)
   constructor(private store: Store, private service: TodoServiceService) {
   }
   ngOnInit(): void {
@@ -22,20 +21,15 @@ export class TodoListComponent implements OnInit {
 
 
   AddTodo(addTodos: todo) {
-    this.service.createTodo(addTodos).subscribe(addTodos => this.store.dispatch(addTodo({ addTodos })))
+    this.service.createTodo(addTodos).subscribe(addTodos => { console.log("After Subscribing:", addTodos); this.store.dispatch(addTodo({ addTodos })) })
   }
 
   delTodo(todo: any) {
     this.service.delTodo(todo.id).subscribe(data => console.log(data))
   }
 
-  // oldtodo: todo = { name: "chinmay", priority: "low" };
 
-  setOld(old: todo) {
-    // this.oldtodo = old
-  }
-
-  upTodo(upTodo: todo) {
-    // this.store.dispatch(updateTodo({ upTodo: upTodo, oldtodo: this.oldtodo }))
+  upTodo(updatedData: any) {
+    this.service.updateTodo(updatedData).subscribe(data => console.log(data))
   }
 }

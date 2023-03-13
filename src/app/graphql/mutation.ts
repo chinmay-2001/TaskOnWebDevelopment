@@ -19,3 +19,13 @@ export const del_todo = gql`
         }
     }
 `
+
+export const update_todo = gql`
+    mutation updateTodo($todoupdate:UpdateTodoInput!){
+        updateTodo(todoupdate:$todoupdate){
+            id
+            name
+            priority
+        }
+    }
+`

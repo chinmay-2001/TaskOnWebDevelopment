@@ -4,28 +4,6 @@ const mongoose=require('mongoose')
 const {url}=require('../Backend/Config/config')
 const app=express()
 
-// let todos = [  
-//     {  
-//         name: 'wake up at 5',  
-//         priority: 'low',  
-//     },  
-//     {  
-//         name: 'morning walk at 6',  
-//         priority: 'low',  
-//     },  
-//     {  
-//         _id:"3",
-//         name: 'Reliance Industries',  
-//         priority: 'Dhirubhai Ambani',  
-//     },  
-//     {   
-//         _id:"4",
-//         name: 'Bajaj Auto',  
-//         priority: 'Jamnalal Bajaj',  
-//     },  
-// ];  
-
-
 const typeDefs = gql`  
     type Todo { 
         _id:ID! 

@@ -7,7 +7,7 @@ import { todo } from "../models/Todo";
 
 export const fetchtodo = createReducer(initialState,
     on(getTodo, (state: todo[], { listTodo }) => { return ([...state, ...listTodo]) }),
-    on(addTodo, (state: todo[], { addTodos }) => { console.log("from add todo"); return ([...state, addTodos]) }),
+    on(addTodo, (state: todo[], { addTodos }) => { console.log("from add todo:", addTodos); return (state = [...state, addTodos]) }),
     on(delTodo, (state: todo[], { todoName }) => { return state = state.filter((todos: todo) => { console.log("Todos.Name:", todos.name, " todoName:", todoName, " State:", state); todos.name != todoName }) }
     ),
 

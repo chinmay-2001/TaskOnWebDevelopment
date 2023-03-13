@@ -3,7 +3,7 @@ import { Apollo, } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
 import { todo } from '../store/models/Todo';
 import { get_todo } from '../graphql/queres'
-import { create_Todo, del_todo } from '../graphql/mutation';
+import { create_Todo, del_todo, update_todo } from '../graphql/mutation';
 import { Store } from '@ngrx/store';
 
 
@@ -33,6 +33,15 @@ export class TodoServiceService {
       variables: { IdInput: id }
     })
       .pipe(map((result: any) => { console.log("deleted:", result); return result.data.todos }))
+  }
+
+  updateTodo(updatedata: any): Observable<todo> {
+    console.log("updated Data:", updatedata)
+    return this.apollo.mutate({
+      mutation: update_todo,
+      variables: { todoupdate: updatedata }
+    })
+      .pipe(map((result: any) => { console.log("updated:", result); return result.data }))
   }
 
 }
