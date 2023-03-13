@@ -47,7 +47,6 @@
                   class="form-control"
                   id="name"
                   name="todoName"
-                  [(ngModel)]="id_to_add"
                 />
               </div>
               <div class="mb-3">
@@ -85,7 +84,6 @@
               class="btn btn-primary"
               (click)="
                 add.emit({
-                  _id: id_to_add,
                   name: todo_to_add,
                   priority: Priority_to_add
                 })
@@ -125,9 +123,8 @@
             </button>
           </td>
           <td>
-            <button class="btn btn-dark" (click)="del.emit(todos._id)">
-              Delete
-            </button>
+            <!-- <button class="btn btn-dark" (click)="del.emit(todos)"> -->
+            <button class="btn btn-dark">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -187,7 +184,6 @@
           class="btn btn-primary"
           (click)="
             up.emit({
-              _id: id_to_add,
               name: up_todo_name,
               priority: up_priority
             })

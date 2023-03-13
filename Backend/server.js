@@ -4,33 +4,30 @@ const mongoose=require('mongoose')
 const {url}=require('../Backend/Config/config')
 const app=express()
 
-let todos = [  
-    {  
-        _id:"1",
-        name: 'wake up at 5',  
-        priority: 'low',  
-    },  
-    {  
-        _id:"2",
-        name: 'morning walk at 6',  
-        priority: 'low',  
-    },  
-    {  
-        _id:"3",
-        name: 'Reliance Industries',  
-        priority: 'Dhirubhai Ambani',  
-    },  
-    {   
-        _id:"4",
-        name: 'Bajaj Auto',  
-        priority: 'Jamnalal Bajaj',  
-    },  
-];  
+// let todos = [  
+//     {  
+//         name: 'wake up at 5',  
+//         priority: 'low',  
+//     },  
+//     {  
+//         name: 'morning walk at 6',  
+//         priority: 'low',  
+//     },  
+//     {  
+//         _id:"3",
+//         name: 'Reliance Industries',  
+//         priority: 'Dhirubhai Ambani',  
+//     },  
+//     {   
+//         _id:"4",
+//         name: 'Bajaj Auto',  
+//         priority: 'Jamnalal Bajaj',  
+//     },  
+// ];  
 
 
 const typeDefs = gql`  
     type Todo {  
-        _id: String!
         name: String!  
         priority: String!  
     }  
@@ -41,7 +38,6 @@ const typeDefs = gql`
         todos:Query!
     }
     input todoInputData{
-        _id:String!
         name:String!
         priority:String!
     }
@@ -55,15 +51,21 @@ const typeDefs = gql`
     }   
 `;  
 
+const Todo=require('./models/model')
 const resolvers={
     Query:{
-        todos:()=>{return todos}
+        todos:async()=>{
+            const todoList=await Todo.find()
+            console.log(todoList)
+            return todoList
+        }
     },
     Mutation:{
-        createTodo:(_, {todoInput})=>{
+        createTodo: async(_, {todoInput})=>{
             console.log("inside create todo of server")
-            todos= [...todos,todoInput]
-            return todoInput
+           const todo= await Todo.create(todoInput)
+            
+            return todo
         },
         delTodo:(_,{IdInput})=>{
             console.log("inside detTodo with Id:",IdInput)

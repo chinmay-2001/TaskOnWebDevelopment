@@ -28,7 +28,7 @@ export class TodoListComponent implements OnInit {
     this.service.delTodo(id).subscribe(data => this.todos$ = this.service.fetchTodo())
   }
 
-  oldtodo: todo = { _id: "5", name: "chinmay", priority: "low" };
+  oldtodo: todo = { name: "chinmay", priority: "low" };
 
   setOld(old: todo) {
     this.oldtodo = old
