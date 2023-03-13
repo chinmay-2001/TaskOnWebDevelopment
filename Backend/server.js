@@ -1,6 +1,7 @@
 const { ApolloServer,gql } = require('apollo-server-express');
 const express= require('express')
-
+const mongoose=require('mongoose')
+const {url}=require('../Backend/Config/config')
 const app=express()
 
 let todos = [  
@@ -74,13 +75,28 @@ const resolvers={
     }
 }
 
+
+
+mongoose.Promise=global.Promise;
+mongoose.connect(url,{
+    useNewUrlParser:true,
+    useUnifiedTopology:true
+})
+.then(()=>{
+    console.log("connected successfully to the server")
+})
+.catch((err)=>{
+    console.log("could not connect to database ...Existing Now...",err)
+})
 const server = new ApolloServer({ typeDefs, resolvers }); 
 
 async function startServer(){
     await server.start()
     server.applyMiddleware({app})
 
-    app.listen(4000,()=>{   
+    
+
+app.listen(4000,()=>{   
         console.log(`server start at http://localhost:4000${server.graphqlPath}`)
     })
 }
