@@ -27,7 +27,9 @@ const app=express()
 
 
 const typeDefs = gql`  
-    type Todo {  
+    type Todo { 
+        _id:ID! 
+        id:Int!
         name: String!  
         priority: String!  
     }  
@@ -43,7 +45,13 @@ const typeDefs = gql`
     }
     type Mutation{
         createTodo(todoInput:todoInputData!):Todo!
-        delTodo(IdInput:String):[Todo!]!
+        delTodo(IdInput:Int):Todo!
+        updateTodo(todoupdate:UpdateTodoInput!):Todo!
+    }
+    input UpdateTodoInput{
+        id:Int!
+        name:String!
+        priority:String!
     }
     type Schema{
         query:RootQuery
@@ -63,16 +71,25 @@ const resolvers={
     Mutation:{
         createTodo: async(_, {todoInput})=>{
             console.log("inside create todo of server")
-           const todo= await Todo.create(todoInput)
-            
+            count=await Todo.find().count()+1
+            const todo= await Todo.create({...todoInput,id:count+1})
+            console.log("Todo:",todo)
             return todo
         },
-        delTodo:(_,{IdInput})=>{
+        delTodo:async(_,{IdInput})=>{
             console.log("inside detTodo with Id:",IdInput)
             console.log("type of Todo:",typeof IdInput)
-            todos=todos.filter((todo)=>`${todo._id}`!==IdInput)
+            const todos=await Todo.findOneAndDelete({ id: IdInput });
             console.log(todos)
             return todos    
+        },
+        updateTodo:async(_,{todoupdate})=>{
+            console.log("Upate Input:",todoupdate)
+            const query={id:todoupdate.id}
+            const update={name:todoupdate.name,priority:todoupdate.priority}
+            const updatedTodos=await Todo.findOneAndUpdate(query,{$set:update})
+            console.log(updatedTodos)
+            return updatedTodos
         }
     }
 }

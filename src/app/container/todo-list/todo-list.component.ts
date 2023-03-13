@@ -24,17 +24,18 @@ export class TodoListComponent implements OnInit {
   AddTodo(addTodos: todo) {
     this.service.createTodo(addTodos).subscribe(addTodos => this.store.dispatch(addTodo({ addTodos })))
   }
-  delTodo(id: string) {
-    this.service.delTodo(id).subscribe(data => this.todos$ = this.service.fetchTodo())
+
+  delTodo(todo: any) {
+    this.service.delTodo(todo.id).subscribe(data => console.log(data))
   }
 
-  oldtodo: todo = { name: "chinmay", priority: "low" };
+  // oldtodo: todo = { name: "chinmay", priority: "low" };
 
   setOld(old: todo) {
-    this.oldtodo = old
+    // this.oldtodo = old
   }
 
   upTodo(upTodo: todo) {
-    this.store.dispatch(updateTodo({ upTodo: upTodo, oldtodo: this.oldtodo }))
+    // this.store.dispatch(updateTodo({ upTodo: upTodo, oldtodo: this.oldtodo }))
   }
 }

@@ -26,7 +26,7 @@ export class TodoServiceService {
       .pipe(map((result: any) => result.data.createTodo))
   }
 
-  delTodo(id: String): Observable<todo[]> {
+  delTodo(id: Number): Observable<todo> {
     console.log("inside deleteTodo:", id)
     return this.apollo.mutate({
       mutation: del_todo,

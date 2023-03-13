@@ -4,16 +4,16 @@ import gql from 'graphql-tag';
 export const create_Todo = gql`
     mutation createTodo($todoInput: todoInputData!){
         createTodo(todoInput: $todoInput) {
-            _id
+            id
             name
             priority
         }
     }
 `
 export const del_todo = gql`
-    mutation delTodo($IdInput:String){
+    mutation delTodo($IdInput:Int){
         delTodo(IdInput:$IdInput){
-            _id
+            id
             name
             priority
         }

@@ -18,7 +18,7 @@ export class TodoListComponentComponent {
   Priority_to_add: string = ""
 
 
-  @Output() del = new EventEmitter<string>()
+  @Output() del = new EventEmitter<todo>()
 
   up_todo_name: string = ""
   up_priority: string = ""

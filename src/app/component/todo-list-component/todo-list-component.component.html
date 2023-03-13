@@ -41,15 +41,6 @@
           <div class="modal-body">
             <form>
               <div class="mb-3">
-                <label for="TodoName" class="form-label">Id</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="name"
-                  name="todoName"
-                />
-              </div>
-              <div class="mb-3">
                 <label for="TodoName" class="form-label">Todo</label>
                 <input
                   type="text"
@@ -123,8 +114,9 @@
             </button>
           </td>
           <td>
-            <!-- <button class="btn btn-dark" (click)="del.emit(todos)"> -->
-            <button class="btn btn-dark">Delete</button>
+            <button class="btn btn-dark" (click)="del.emit(todos)">
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
