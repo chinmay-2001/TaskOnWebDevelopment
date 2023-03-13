@@ -2,26 +2,20 @@ import { createReducer, on } from "@ngrx/store";
 import { initialState } from '../state/state'
 import { getTodo, addTodo, delTodo, updateTodo } from "../actions/action";
 
-import { todo } from "../models/Todo";
+// import { any } from "../models/any";
 
 
 export const fetchtodo = createReducer(initialState,
-    on(getTodo, (state: todo[], { listTodo }) => { return ([...state, ...listTodo]) }),
-    on(addTodo, (state: todo[], { addTodos }) => { console.log("from add todo:", addTodos); return (state = [...state, addTodos]) }),
-    on(delTodo, (state: todo[], { todoName }) => { return state = state.filter((todos: todo) => { console.log("Todos.Name:", todos.name, " todoName:", todoName, " State:", state); todos.name != todoName }) }
+    on(getTodo, (state: any[], { listTodo }) => { return ([...state, ...listTodo]) }),
+    on(addTodo, (state: any[], { addTodos }) => { console.log("from add any:", addTodos); return (state = [...state, addTodos]) }),
+    on(delTodo, (state: any[], { id }) => { return state = state.filter((todos: any) => todos.id != id) }
     ),
 
-    on(updateTodo, (state: todo[], { upTodo, oldtodo }) => {
+    on(updateTodo, (state: any[], { upTodo, id }) => {
         console.log("inside updatetodo")
-        const index = state.findIndex(todo => todo.name === oldtodo.name)
-        console.log("index:", index)
-        const updateitems = [
-            ...state.slice(0, index),
-            upTodo,
-            ...state.slice(index + 1)
-        ]
-        console.log("updateitems:", updateitems)
-        return [...state, ...updateitems]
+
+        // console.log("updateitems:", updateitems)
+        return state.map((todo) => (todo.id == id ? upTodo : todo))
 
     })
 

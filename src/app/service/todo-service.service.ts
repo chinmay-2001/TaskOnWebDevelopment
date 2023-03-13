@@ -26,16 +26,16 @@ export class TodoServiceService {
       .pipe(map((result: any) => result.data.createTodo))
   }
 
-  delTodo(id: Number): Observable<todo> {
+  delTodo(id: Number): Observable<any> {
     console.log("inside deleteTodo:", id)
     return this.apollo.mutate({
       mutation: del_todo,
       variables: { IdInput: id }
     })
-      .pipe(map((result: any) => { console.log("deleted:", result); return result.data.todos }))
+      .pipe(map((result: any) => { console.log("deleted:", result); return result.data.delTodo }))
   }
 
-  updateTodo(updatedata: any): Observable<todo> {
+  updateTodo(updatedata: any): Observable<any> {
     console.log("updated Data:", updatedata)
     return this.apollo.mutate({
       mutation: update_todo,
