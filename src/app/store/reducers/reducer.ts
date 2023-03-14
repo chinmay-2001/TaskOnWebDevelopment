@@ -12,13 +12,9 @@ export const fetchtodo = createReducer(initialState,
     ),
 
     on(updateTodo, (state: any[], { upTodo, id }) => {
-        console.log("inside updatetodo")
-
-        // console.log("updateitems:", updateitems)
+        console.log("inside updatetodo", upTodo)
         return state.map((todo) => (todo.id == id ? upTodo : todo))
-
     })
-
 )
 
 

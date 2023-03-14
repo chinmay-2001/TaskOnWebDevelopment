@@ -41,7 +41,7 @@ export class TodoServiceService {
       mutation: update_todo,
       variables: { todoupdate: updatedata }
     })
-      .pipe(map((result: any) => { console.log("updated:", result); return result.data }))
+      .pipe(map((result: any) => { console.log("updated:", result); return result }))
   }
 
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { switchMap } from 'rxjs';
 import { TodoServiceService } from 'src/app/service/todo-service.service';
 import { delTodo, updateTodo, addTodo, getTodo } from 'src/app/store/actions/action';
 import { todo } from 'src/app/store/models/Todo';
@@ -44,6 +43,6 @@ export class TodoListComponent implements OnInit {
   upTodo(updatedData: any) {
     this.service
       .updateTodo(updatedData)
-      .subscribe(data => this.store.dispatch(updateTodo({ upTodo: data.updateTodo.updateTodo, id: updatedData.id })))
+      .subscribe(data => { console.log("Inside upTodo:", data); this.store.dispatch(updateTodo({ upTodo: data.data.updateTodo, id: updatedData.id })) })
   }
 }

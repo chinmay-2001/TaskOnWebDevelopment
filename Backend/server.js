@@ -42,32 +42,27 @@ const resolvers={
     Query:{
         todos:async()=>{
             const todoList=await Todo.find()
-            console.log(todoList)
             return todoList
         }
     },
     Mutation:{
         createTodo: async(_, {todoInput})=>{
-            console.log("inside create todo of server")
             count=await Todo.find().count()+1
             const todo= await Todo.create({...todoInput,id:count+1})
-            console.log("Todo:",todo)
             return todo
         },
         delTodo:async(_,{IdInput})=>{
-            console.log("inside detTodo with Id:",IdInput)
-            console.log("type of Todo:",typeof IdInput)
             const todos=await Todo.findOneAndDelete({ id: IdInput });
-            console.log(todos)
             return todos    
         },
         updateTodo:async(_,{todoupdate})=>{
-            console.log("Upate Input:",todoupdate)
             const query={id:todoupdate.id}
             const update={name:todoupdate.name,priority:todoupdate.priority}
+            console.log("To update with :",update)
             const updatedTodos=await Todo.findOneAndUpdate(query,{$set:update})
             console.log(updatedTodos)
-            return updatedTodos
+            update.id=updatedTodos.id
+            return update
         }
     }
 }
