@@ -2,8 +2,10 @@ const { ApolloServer,gql } = require('apollo-server-express');
 const express= require('express')
 const mongoose=require('mongoose')
 const {url}=require('../Backend/Config/config')
+const router =require('./Auth/auth')
 const app=express()
-
+const cors = require('cors');
+app.use(cors())
 const typeDefs = gql`  
     type Todo { 
         _id:ID! 
@@ -67,7 +69,7 @@ const resolvers={
     }
 }
 
-
+app.use('/api/login/',router)
 
 mongoose.Promise=global.Promise;
 mongoose.connect(url,{

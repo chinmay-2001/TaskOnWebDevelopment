@@ -1,0 +1,39 @@
+type Todo { 
+    _id:ID! 
+    id:Int!
+    name: String!  
+    priority: String!  
+}  
+type Query {  
+    todos: [Todo!]! 
+}   
+type RootQuery{
+    todos:Query!
+}
+input todoInputData{
+    name:String!
+    priority:String!
+}
+type Mutation{
+    createTodo(todoInput:todoInputData!):Todo!
+    delTodo(IdInput:Int):Todo!
+    updateTodo(todoupdate:UpdateTodoInput!):Todo!
+}
+input UpdateTodoInput{
+    id:Int!
+    name:String!
+    priority:String!
+}
+type Schema{
+    query:RootQuery
+    mutation:Mutation
+}   
+
+type Subscription{
+    post:PostSubscriptionPayload!
+}
+
+type PostSubscriptionPayload{
+    mutation:String!
+    data: Todo!
+}
